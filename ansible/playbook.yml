@@ -7,10 +7,11 @@
 
     - name: Copy WAR file to Tomcat
       copy:
-        src: "/var/snap/jenkins/common/workspace/mavenansibleapp/target/MavenAnsibleWebApp1.war"
+        src: "/var/snap/jenkins/5022/workspace/mavenansibleapp/target/MavenAnsibleWebApp1.war"
         dest: "/opt/tomcat/webapps/MavenAnsibleWebApp1.war"
 
     - name: Restart Tomcat
-      systemd:
-        name: tomcat9
-        state: restarted
+      shell: |
+        /opt/tomcat/bin/shutdown.sh
+        sleep 5
+        /opt/tomcat/bin/startup.sh
